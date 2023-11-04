@@ -10,6 +10,32 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Smart Contact Manager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " th:href="@{/signup}">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/signin" tabindex="-1" aria-disabled="true">login</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
 <div class="container ">
 
   <div class="row">
@@ -17,8 +43,8 @@
       <div class=" my-card text-dark ">
 
 
-        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
-          <p class="text-center" th:text="${session.message.getContent()}"></p>
+        <div th:if="${session.message}"  class="alert " >
+          <p class="text-center" th:text="${session.message}"></p>
 
         </div>
 
