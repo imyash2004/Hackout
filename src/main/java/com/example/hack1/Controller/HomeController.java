@@ -3,11 +3,22 @@ package com.example.hack1.Controller;
 import com.example.hack1.Repository.UserRepo;
 import com.example.hack1.entities.Message;
 import com.example.hack1.entities.User;
+import com.example.hack1.entities.Video;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.security.Principal;
 
 @Controller
 public class HomeController
@@ -58,14 +69,64 @@ public class HomeController
     public String login1(){
         return "login";
     }
-    @GetMapping("/dologin")
-    public String login(@RequestParam("email") String email,@RequestParam("password") String password){
+    @PostMapping("/dologin")
+    public String login(@RequestParam("email") String email,@RequestParam("password") String password,HttpSession session){
         User u=this.userRepo.getUserByEmail(email);
         if(u.getPassword().equals(password)){
             return"home";
         }
         else {
         return "login";
-    }}
+    }
+    }
+    @GetMapping("/upload")
+    public String upload(){
+        return "upload";
+    }
+    @PostMapping("/uploading")
+    public String uploaded(@ModelAttribute Video video, Principal p, @RequestParam("vrl") MultipartFile vr,HttpSession session){
+        try {
+            String name=p.getName();
+            System.out.println(name);
+            User user=this.userRepo.getUserByEmail(name);
+            video.setUserId(user.getUserId());
+
+
+
+            if(vr.isEmpty()){
+
+                System.out.println("file is empty");
+                return "upload";
+            }
+            else{
+                video.setVideoUrl(vr.getOriginalFilename() );
+                File file=new ClassPathResource("static/video").getFile();
+                Path path = Paths.get(file.getAbsolutePath()+File.separator+vr.getOriginalFilename());
+
+                Files.copy(vr.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("video is uploaded");
+            }
+            video.setTags(null);
+            video.setComments(null);
+            video.setDislikes(0);
+            video.setLikes(0);
+
+
+
+
+            session.setAttribute("message",new Message("your contact is added successfully","success"));
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("error"+e.getMessage());
+
+            session.setAttribute("message",new Message("something went wrong try again","alert"));
+
+        }
+        return "home";
+        }
+
 
 }
