@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="scroll.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<style>
+
+    body{
+        background-color: black !important;
+    }
+
+
+    .card{
+        height: 216px;
+        width: 384px;
+        border-radius: 10px;
+        box-shadow: 0px 0px  50px rgba(0,0,0,0.2);;
+        margin: 5px;
+        position :relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 170px;
+    }
+
+    .cards{
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 20px;
+        border: 2px solid black;
+    }
+
+
+    .img{
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+        position: absolute;
+        top: 10%;
+    }
+
+
+    .title{
+        height: 20%;
+        color: #000000;
+    }
+
+    .loading{
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        position:fixed;
+        height: 100%;
+        width: 100%;
+        background: black;
+        color: black;
+        display: none;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card:last-child{
+        float:left;
+    }
+
+
+
+    .left-container{
+        height: clamp(80vh, 100vh,200vh);
+        padding: 10px;
+        margin: 5px;
+        background-color: rgb(33, 33, 33);
+        border-radius: 10px;
+
+    }
+
+
+
+
+    pre {
+        font-family: "Roboto Mono", monospace;
+        background-color: #f5f5f5;
+        padding: 10px;
+        border: 1px solid #3f3636;
+        border-radius: 5px;
+        overflow: auto;
+        border-radius: 20px;
+    }
+
+    /* Style the code lines */
+    code {
+        display: block;
+        white-space: pre-wrap;
+
+    }
+
+    video{
+        padding: 20px;
+        border-radius: 10px;
+
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black;"data-bs-theme="dark">
+    <a class="navbar-brand mx-3 " href="#">
+        <img src="test.png.png" style="border-radius: 10px;" alt="Bootstrap" width="30" height="24">
+    </a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Feed</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Videos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Uploaded videos</a></li>
+                        <li><a class="dropdown-item" href="#">Playlists</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"> New Video</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <a class="navbar-brand mx-3" href="#">
+                <img src="test.png.png" style="border-radius: 10px;" alt="Bootstrap" width="30" height="24">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ------------------------------------------------------------------------------------- -->
+
+<div>
+
+
+<div class="text-center">
+    <div class="row">
+        <div class="col">
+
+
+            <div class = "left-container">
+            <pre>
+                <code>
+                    function helloWorld() {
+                        console.log("Hello, World!");
+                    }
+                </code>
+            </pre>
+                <pre>
+                <code>
+                    #include
+
+                    int main() {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }
+                </code>
+            </pre>
+                <script>
+                    hljs.initHighlightingOnLoad();
+                </script>
+
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="col">
+
+            <video width="440" height="640" controls>
+                <source src="example5.mp4" type="video/mp4">
+                <source src="example.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <div class = "wrapper">
+                <div class = "cards">
+                    <div class = "card">
+                        <h1 class = "title">
+                            Making a robot that walks
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        </div>
+    </div>
+
+
+
+    <!-- ------------------------------------------------------------------------------------- -->
+
+
+
+
+    <!-- -------------------------------------------------------------------------------------------- -->
+
+
+
+    <div class="text-center">
+        <div class="row">
+            <div class="col">
+
+
+                <div class = "left-container">
+            <pre>
+                <code>
+                    function helloWorld() {
+                        console.log("Hello, World!");
+                    }
+                </code>
+            </pre>
+                    <pre>
+                <code>
+                    #include
+
+                    int main() {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }
+                </code>
+            </pre>
+                    <script>
+                        hljs.initHighlightingOnLoad();
+                    </script>
+
+                </div>
+
+
+
+
+
+
+            </div>
+            <div class="col">
+
+                <video width="440" height="640" controls>
+                    <source src="example.mp4" type="video/mp4">
+                    <source src="example.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <div class = "wrapper">
+                    <div class = "cards">
+                        <div class = "card">
+                            <h1 class = "title">
+                                World class software engineering
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <div class="row">
+                <div class="col">
+
+
+                    <div class = "left-container">
+            <pre>
+                <code>
+                    function helloWorld() {
+                        console.log("Hello, World!");
+                    }
+                </code>
+            </pre>
+                        <pre>
+                <code>
+                    #include
+
+                    int main() {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }
+                </code>
+            </pre>
+                        <script>
+                            hljs.initHighlightingOnLoad();
+                        </script>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+                <div class="col">
+
+                    <video width="440" height="640" controls>
+                        <source src="example.mp4" type="video/mp4">
+                        <source src="example.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class = "wrapper">
+                        <div class = "cards">
+                            <div class = "card">
+                                <h1 class = "title">
+                                    Efficiency through Recursion
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+                </div>
+            </div>
+
+
+
+            <div class="text-center">
+                <div class="row">
+                    <div class="col">
+
+
+                        <div class = "left-container">
+            <pre>
+                <code>
+                    function helloWorld() {
+                        console.log("Hello, World!");
+                    }
+                </code>
+            </pre>
+                            <pre>
+                <code>
+                    #include
+
+                    int main() {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }
+                </code>
+            </pre>
+                            <script>
+                                hljs.initHighlightingOnLoad();
+                            </script>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="col">
+
+                        <video width="440" height="640" controls>
+                            <source src="example.mp4" type="video/mp4">
+                            <source src="example.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class = "wrapper">
+                            <div class = "cards">
+                                <div class = "card">
+                                    <h1 class = "title">
+                                        Yeet-a-Bot
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+                    </div>
+                </div>
+
+
+
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col">
+
+
+                            <div class = "left-container">
+            <pre>
+                <code>
+                    function helloWorld() {
+                        console.log("Hello, World!");
+                    }
+                </code>
+            </pre>
+                                <pre>
+                <code>
+                    #include
+
+                    int main() {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }
+                </code>
+            </pre>
+                                <script>
+                                    hljs.initHighlightingOnLoad();
+                                </script>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="col">
+
+                            <video width="440" height="640" controls>
+                                <source src="example.mp4" type="video/mp4">
+                                <source src="example.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class = "wrapper">
+                                <div class = "cards">
+                                    <div class = "card">
+                                        <h1 class = "title">
+                                            Making a robot dog pee bear
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+                        </div>
+                    </div>
+                    <!-- ----------------------------------------------------------------------- -->
+
+
+                    <script>
+
+                        var wrapper = document.querySelector(".wrapper");
+
+                        var cards = document.querySelector(".cards");
+                        var loading = document.querySelector(".loading");
+                        var page = 0;
+
+                        var size = 10;
+
+                        var posts = [];
+
+                        window.onload = function () {
+                            getData();
+                        };
+
+                        function getData() {
+                            // loading.style.display = "flex";
+//     fetch(`https://api.instantwebtools.net/vl/passenger?page=${page}&size=${size}`,{
+//     method: "GET",
+// })
+                            // .then((data) =>
+                            // {
+                            // return data.json();
+                            // })
+                            // .then ((res) => {
+                            // posts = res.data;
+                            // if (posts.length > 0){
+                            const newElement = document.createElement('div');
+
+
+                            // posts.map((item) => {
+                            newElement.innerHTML = `<div class="text-center">
+                <div class="row">
+                    <div class="col">
+
+
+                        <div class = "left-container">
+                            <pre>
+                                <code>
+                                    function helloWorld() {
+                                        console.log("Hello, World!");
+                                    }
+                                    </code>
+                                    </pre>
+                                    <pre>
+                                        <code>
+                                            #include
+
+                                                int main() {
+                                                    printf("Hello, World!");
+                        return 0;
+                    }
+                    </code>
+                    </pre>
+                    </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="col">
+
+                        <video width="440" height="640" controls>
+                            <source src="example5.mp4" type="video/mp4">
+                            <source src="example.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                            </video>
+                            <div class = "wrapper">
+                                <div class = "cards">
+                                    <div class = "card">
+                                        <h1 class = "title">
+                                            Making a robot that walks
+                                            </h1>
+                </div>
+                </div>
+                </div>
+
+                </div>
+                </div>`;
+
+
+
+                            document.body.appendChild(newElement);
+                        }
+                        //     );
+                        // }
+                        // })
+                        // };
+
+                        function addData() {
+                            setTimeout(() => {
+                                page++;
+                                getData();
+                            }, 300);
+                        }
+
+                        window.addEventListener('scroll', function(){
+                            const{ scrollTop, scrollHeight, ClientHeight} = document.documentElement;
+
+                            const pageHeight = document.documentElement.scrollHeight;
+
+                            // Get the current scroll position
+                            const scrollPosition = window.scrollY;
+
+                            // Calculate the halfway point of the page
+                            const halfwayPoint = pageHeight / 2;
+
+                            if (scrollPosition >= halfwayPoint) {
+                                // User has scrolled halfway through the page
+                                addData();
+                            }
+                        });
+                    </script>
+
+
+
+</body>
+</html>

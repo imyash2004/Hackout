@@ -32,13 +32,17 @@ public class HomeController
 //                "bd");
 //        return "home";
 //    }
+    @GetMapping("/")
+    public String index(){
+        return "home";
+    }
     @GetMapping("/signup")
     public String signup(Model m,HttpSession session){
         //m.addAttribute("user",new User());
         //session.setAttribute("message"," ");
         return "signup";
     }
-    @GetMapping ("/home")
+    @GetMapping ("/user/home")
     public String home(HttpSession session){
 
         return "home";
@@ -48,12 +52,12 @@ public class HomeController
         try {
             if (!agreement) {
                 //model.addAttribute("message", ("You have not agreed to the terms and conditions"));
-                session.setAttribute("message",new Message("You have not agreed terms and Condition","alert-success"));
+                session.setAttribute("message",new Message("You have not agreed terms and Condition","alert-danger"));
                 return "signup"; // Return to the registration form
             } else {
                 // Perform user data validation here (e.g., using annotations or custom validation logic)
                 // If validation fails, return an error message and stay on the registration form
-
+                user.setRole("ROLE_USER");
                 this.userRepo.save(user);
                 session.setAttribute("message",new Message("SuccessFully Registered","alert-success"));
                 return "login"; // Redirect to a success page
@@ -65,68 +69,78 @@ public class HomeController
         }
 
     }
+
     @GetMapping("/login")
-    public String login1(){
+    public String login(){
         return "login";
     }
     @PostMapping("/dologin")
-    public String login(@RequestParam("email") String email,@RequestParam("password") String password,HttpSession session){
+    public String login1(@RequestParam("email") String email,@RequestParam("password") String password,HttpSession session){
         User u=this.userRepo.getUserByEmail(email);
+        if(u==null){
+            session.setAttribute("message",new Message("Invalid UserName and Password","alert-danger"));
+            return "login";
+        }
         if(u.getPassword().equals(password)){
-            return"home";
+            session.setAttribute("email",u.getEmail());
+
+            return"scroll";
         }
         else {
-        return "login";
+            session.setAttribute("message",new Message("Invalid UserName and Password","alert-danger"));
+
+            return "login";
     }
     }
-    @GetMapping("/upload")
+    @GetMapping("/user/upload")
     public String upload(){
+
         return "upload";
     }
-    @PostMapping("/uploading")
-    public String uploaded(@ModelAttribute Video video, Principal p, @RequestParam("vrl") MultipartFile vr,HttpSession session){
-        try {
-            String name=p.getName();
-            System.out.println(name);
-            User user=this.userRepo.getUserByEmail(name);
-            video.setUserId(user.getUserId());
-
-
-
-            if(vr.isEmpty()){
-
-                System.out.println("file is empty");
-                return "upload";
-            }
-            else{
-                video.setVideoUrl(vr.getOriginalFilename() );
-                File file=new ClassPathResource("static/video").getFile();
-                Path path = Paths.get(file.getAbsolutePath()+File.separator+vr.getOriginalFilename());
-
-                Files.copy(vr.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("video is uploaded");
-            }
-            video.setTags(null);
-            video.setComments(null);
-            video.setDislikes(0);
-            video.setLikes(0);
-
-
-
-
-            session.setAttribute("message",new Message("your contact is added successfully","success"));
-
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            System.out.println("error"+e.getMessage());
-
-            session.setAttribute("message",new Message("something went wrong try again","alert"));
-
-        }
-        return "home";
-        }
-
+//    @PostMapping("/uploading")
+//    public String uploaded(@ModelAttribute Video video, Principal p, @RequestParam("vrl") MultipartFile vr,HttpSession session){
+//        try {
+//            String name=p.getName();
+//            System.out.println(name);
+//            User user=this.userRepo.getUserByEmail(name);
+//            video.setUserId(user.getUserId());
+//
+//
+//
+//            if(vr.isEmpty()){
+//
+//                System.out.println("file is empty");
+//                return "upload";
+//            }
+//            else{
+//                video.setVideoUrl(vr.getOriginalFilename() );
+//                File file=new ClassPathResource("static/video").getFile();
+//                Path path = Paths.get(file.getAbsolutePath()+File.separator+vr.getOriginalFilename());
+//
+//                Files.copy(vr.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+//                System.out.println("video is uploaded");
+//            }
+//            video.setTags(null);
+//            video.setComments(null);
+//            video.setDislikes(0);
+//            video.setLikes(0);
+//
+//
+//
+//
+//            session.setAttribute("message",new Message("your contact is added successfully","success"));
+//
+//
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            System.out.println("error"+e.getMessage());
+//
+//            session.setAttribute("message",new Message("something went wrong try again","alert"));
+//
+//        }
+//        return "home";
+//        }
+//
 
 }

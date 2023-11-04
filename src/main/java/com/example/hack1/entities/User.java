@@ -1,8 +1,9 @@
 package com.example.hack1.entities;
 
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name="User")
@@ -11,8 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     private String firstName;
+    private String role;
     private String lastName;
     private String email;
+
     private String password;
     private String profession;
 
@@ -47,6 +50,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public String getPassword() {
         return password;
@@ -86,5 +90,23 @@ public class User {
                 ", password='" + password + '\'' +
                 ", profession='" + profession + '\'' +
                 '}';
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public User(Integer userId, String firstName, String role, String lastName, String email, String password, String profession) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.role = role;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.profession = profession;
     }
 }
