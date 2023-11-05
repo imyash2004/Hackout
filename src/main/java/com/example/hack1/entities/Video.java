@@ -17,8 +17,7 @@ public class Video {
     private String title;
     @ElementCollection
     private Set<String> tags;
-    @ElementCollection
-    private ArrayList<String> comments;
+
     private Integer userId;
     private Integer likes;
     private Integer dislikes;
@@ -48,13 +47,6 @@ public class Video {
         this.tags = tags;
     }
 
-    public ArrayList<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<String> comments) {
-        this.comments = comments;
-    }
 
     public Integer getLikes() {
         return likes;
@@ -84,7 +76,6 @@ public class Video {
         this.videoId = videoId;
         this.description = description;
         this.tags = tags;
-        this.comments = comments;
         this.likes = likes;
         this.dislikes = dislikes;
         VideoUrl = videoUrl;
@@ -96,7 +87,6 @@ public class Video {
                 "videoId=" + videoId +
                 ", description='" + description + '\'' +
                 ", tags=" + tags +
-                ", comments=" + comments +
                 ", likes=" + likes +
                 ", dislikes=" + dislikes +
                 ", VideoUrl='" + VideoUrl + '\'' +
@@ -127,7 +117,6 @@ public class Video {
         this.description = description;
         this.title = title;
         this.tags = tags;
-        this.comments = comments;
         this.userId = userId;
         this.likes = likes;
         this.dislikes = dislikes;

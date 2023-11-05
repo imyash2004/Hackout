@@ -1,12 +1,16 @@
 package com.example.hack1.Controller;
 
 import com.example.hack1.Repository.UserRepo;
+import com.example.hack1.Repository.VideoRepo;
 import com.example.hack1.entities.Message;
 import com.example.hack1.entities.User;
 import com.example.hack1.entities.Video;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class HomeController
@@ -26,6 +31,8 @@ public class HomeController
 {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private VideoRepo videoRepo;
 //    @GetMapping("/")
 //    public String home(){
 //        System.out.println("yash" +
@@ -74,8 +81,8 @@ public class HomeController
     public String login(){
         return "login";
     }
-    @PostMapping("/dologin")
-    public String login1(@RequestParam("email") String email,@RequestParam("password") String password,HttpSession session){
+    @PostMapping("/dologin/{page}")
+    public String login1(@PathVariable("page") Integer page,Model m, @RequestParam("email") String email,@RequestParam("password") String password,HttpSession session){
         User u=this.userRepo.getUserByEmail(email);
         if(u==null){
             session.setAttribute("message",new Message("Invalid UserName and Password","alert-danger"));
@@ -83,7 +90,18 @@ public class HomeController
         }
         if(u.getPassword().equals(password)){
             session.setAttribute("email",u.getEmail());
+            if(page<5){
+                Video v=this.videoRepo.getVideoByVideoId(page);
+                m.addAttribute("l1",v);
+                return "scroll";
+            }
+            List<Video> videos=this.videoRepo.findAll();
+            Pageable pageable = PageRequest.of(page,5);
+            session.setAttribute("list",videos);
 
+            m.addAttribute("l1",videos.get(0));
+            m.addAttribute("l2",videos.get(1));
+            System.out.println(videos);
             return"scroll";
         }
         else {

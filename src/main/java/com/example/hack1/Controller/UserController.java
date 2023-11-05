@@ -1,6 +1,7 @@
 package com.example.hack1.Controller;
 
 import com.example.hack1.Repository.UserRepo;
+import com.example.hack1.Repository.VideoRepo;
 import com.example.hack1.entities.Message;
 import com.example.hack1.entities.User;
 import com.example.hack1.entities.Video;
@@ -26,6 +27,8 @@ import java.security.Principal;
 public class UserController {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private VideoRepo videoRepo;
 
     @PostMapping("/uploading")
     public String uploaded(@ModelAttribute Video video, Principal p,@RequestParam("email") String email, @RequestParam("vrl") MultipartFile vr, HttpSession session){
@@ -44,18 +47,18 @@ public class UserController {
             }
             else{
                 video.setVideoUrl(vr.getOriginalFilename() );
-                File file=new ClassPathResource("static/video").getFile();
+                File file=new ClassPathResource("static/images").getFile();
                 Path path = Paths.get(file.getAbsolutePath()+File.separator+vr.getOriginalFilename());
-
                 Files.copy(vr.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+
                 System.out.println("video is uploaded");
             }
             video.setTags(null);
-            video.setComments(null);
+
             video.setDislikes(0);
             video.setLikes(0);
 
-
+this.videoRepo.save(video);
 
 
             session.setAttribute("message",new Message("your contact is added successfully","success"));

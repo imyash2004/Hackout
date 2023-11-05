@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -192,9 +192,9 @@
         </div>
         <div class="col">
 
-            <video width="440" height="640" controls>
-                <source src="example5.mp4" type="video/mp4">
-                <source src="example.webm" type="video/webm">
+            <video width="440" height="640" controls th:src="@{'/images/'+${l1.videoUrl}}">
+
+
                 Your browser does not support the video tag.
             </video>
             <div class = "wrapper">
@@ -260,9 +260,8 @@
             </div>
             <div class="col">
 
-                <video width="440" height="640" controls>
-                    <source src="example.mp4" type="video/mp4">
-                    <source src="example.webm" type="video/webm">
+                <video width="440" height="640" controls th:src="@{'/images/'+${l2.videoUrl}}">
+
                     Your browser does not support the video tag.
                 </video>
                 <div class = "wrapper">
@@ -318,10 +317,9 @@
                 </div>
                 <div class="col">
 
-                    <video width="440" height="640" controls>
-                        <source src="example.mp4" type="video/mp4">
-                        <source src="example.webm" type="video/webm">
-                        Your browser does not support the video tag.
+                    <video width="440" height="640" controls th:src="@{'/images/'+${l2.videoUrl}}">
+
+                    Your browser does not support the video tag.
                     </video>
                     <div class = "wrapper">
                         <div class = "cards">
@@ -377,10 +375,9 @@
                     </div>
                     <div class="col">
 
-                        <video width="440" height="640" controls>
-                            <source src="example.mp4" type="video/mp4">
-                            <source src="example.webm" type="video/webm">
-                            Your browser does not support the video tag.
+                        <video width="440" height="640" controls th:src="@{'/images/'+${l2.videoUrl}}">
+
+                        Your browser does not support the video tag.
                         </video>
                         <div class = "wrapper">
                             <div class = "cards">
@@ -436,10 +433,9 @@
                         </div>
                         <div class="col">
 
-                            <video width="440" height="640" controls>
-                                <source src="example.mp4" type="video/mp4">
-                                <source src="example.webm" type="video/webm">
-                                Your browser does not support the video tag.
+                            <video width="440" height="640" controls th:src="@{'/images/'+${l2.videoUrl}}">
+
+                            Your browser does not support the video tag.
                             </video>
                             <div class = "wrapper">
                                 <div class = "cards">
@@ -475,17 +471,17 @@
                         };
 
                         function getData() {
-                            // loading.style.display = "flex";
-//     fetch(`https://api.instantwebtools.net/vl/passenger?page=${page}&size=${size}`,{
-//     method: "GET",
-// })
-                            // .then((data) =>
-                            // {
-                            // return data.json();
-                            // })
-                            // .then ((res) => {
-                            // posts = res.data;
-                            // if (posts.length > 0){
+                            loading.style.display = "flex";
+    fetch(`https://localhost:8080/dologin/0`,{
+    method: "GET",
+})
+                            .then((data) =>
+                            {
+                            return data.json();
+                            })
+                            .then ((res) => {
+                            posts = res.data;
+                            if (posts.length > 0){
                             const newElement = document.createElement('div');
 
 
@@ -523,9 +519,8 @@
                     </div>
                     <div class="col">
 
-                        <video width="440" height="640" controls>
-                            <source src="example5.mp4" type="video/mp4">
-                            <source src="example.webm" type="video/webm">
+                <video width="440" height="640" controls th:src="@{'/images/'+${l1.videoUrl}}">
+
                             Your browser does not support the video tag.
                             </video>
                             <div class = "wrapper">
@@ -552,7 +547,7 @@
 
                         function addData() {
                             setTimeout(() => {
-                                page++;
+
                                 getData();
                             }, 300);
                         }
