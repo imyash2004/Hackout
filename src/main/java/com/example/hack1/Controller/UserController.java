@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -31,7 +28,7 @@ public class UserController {
     private VideoRepo videoRepo;
 
     @PostMapping("/uploading")
-    public String uploaded(@ModelAttribute Video video, Principal p,@RequestParam("email") String email, @RequestParam("vrl") MultipartFile vr, HttpSession session){
+    public String uploaded(@ModelAttribute Video video, Principal p,@RequestParam("email") String email,@RequestParam("link")String link, @RequestParam("vrl") MultipartFile vr, HttpSession session){
         try {
 
             User u=this.userRepo.getUserByEmail(email);
@@ -73,6 +70,13 @@ this.videoRepo.save(video);
 
         }
         return "home";
+    }
+
+    @RequestMapping(value = "/load/0", method = RequestMethod.GET, produces = "application/json")
+    public String getVideoByVideoId(@RequestParam("page") String page) {
+        // Replace this with your logic to fetch the video data
+        Video v = this.videoRepo.getVideoByVideoId(1);
+        return v.getVideoUrl();
     }
 
 

@@ -471,17 +471,18 @@
                         };
 
                         function getData() {
-                            loading.style.display = "flex";
-    fetch(`https://localhost:8080/dologin/0`,{
-    method: "GET",
-})
-                            .then((data) =>
-                            {
-                            return data.json();
-                            })
-                            .then ((res) => {
-                            posts = res.data;
-                            if (posts.length > 0){
+//                             loading.style.display = "flex";
+//     fetch(`https://localhost:8080/user/load/1`,{
+//     method: "GET",
+// })
+//                             .then((data) =>
+//                             {
+//                             return data.json();
+//
+//                             })
+//                             .then ((res) => {
+//                             posts = res.data;
+//                             if (posts.length > 0){
                             const newElement = document.createElement('div');
 
 
@@ -519,8 +520,9 @@
                     </div>
                     <div class="col">
 
-                <video width="440" height="640" controls th:src="@{'/images/'+${l1.videoUrl}}">
-
+<video width="440" height="640" controls>
+                            <source src="example5.mp4" type="video/mp4">
+                            <source src="example.webm" type="video/webm">
                             Your browser does not support the video tag.
                             </video>
                             <div class = "wrapper">
